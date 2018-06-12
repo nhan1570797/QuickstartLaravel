@@ -11,6 +11,14 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('', function () {
+    if (Session::has('locale')) {
+        App::setLocale(Session::get('locale'));
+    }
     return view('welcome');
 });
+
+Route::get('language/{locale}', function ($locale) {
+    Session::put('locale', $locale);
+    return redirect()->back();
+}); 
